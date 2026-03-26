@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abidar — Direction Créative & Développement</title>
+    <meta name="description" content="Abidar — Motion Design, Développement Web, Montage Vidéo, Communication & Maquettage UI/UX.">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- INTRO -->
+    <div id="intro">
+        <div class="intro-scene">
+            <div class="intro-3d">
+                <span class="intro-char" style="--i:0; --rx:-80; --ry:120; --d:600px">A</span>
+                <span class="intro-char" style="--i:1; --rx:60; --ry:-90; --d:500px">b</span>
+                <span class="intro-char" style="--i:2; --rx:-40; --ry:200; --d:550px">i</span>
+                <span class="intro-char" style="--i:3; --rx:90; --ry:-150; --d:480px">d</span>
+                <span class="intro-char" style="--i:4; --rx:-60; --ry:80; --d:520px">a</span>
+                <span class="intro-char" style="--i:5; --rx:70; --ry:-60; --d:560px">r</span>
+            </div>
+            <div class="intro-sub">Créatif multidisciplinaire</div>
+        </div>
+        <div class="intro-loader"><div class="intro-loader-fill"></div></div>
+    </div>
+
+    <!-- CURSOR -->
+    <div id="cursor" aria-hidden="true">
+        <div class="cur-dot"></div>
+        <div class="cur-ring"></div>
+        <div class="cur-label"></div>
+    </div>
+
+    <!-- NAV -->
+    <header id="header">
+        <nav>
+            <a href="#" class="logo">Abidar<span>.</span></a>
+            <div class="nav-links">
+                <a href="#accueil" class="nav-link active" data-section="accueil">Accueil</a>
+                <a href="#projets" class="nav-link" data-section="projets">Projets</a>
+                <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+            </div>
+            <a href="#contact" class="nav-cta chrome-border">
+                <span class="status-dot"></span>Disponible
+            </a>
+            <button id="burger" aria-label="Menu"><span></span><span></span></button>
+        </nav>
+    </header>
+
+    <div id="mob-menu">
+        <a href="#accueil" class="mob-link" data-section="accueil">Accueil</a>
+        <a href="#projets" class="mob-link" data-section="projets">Projets</a>
+        <a href="#contact" class="mob-link" data-section="contact">Contact</a>
+    </div>
+
+    <main>
+        <!-- ACCUEIL -->
+        <section id="accueil" class="sec">
+            <div class="hero">
+                <div class="hero-text">
+                    <span class="hero-eyebrow"><span class="ey-line"></span>Créatif multidisciplinaire</span>
+                    <h1 class="hero-h1">
+                        <span class="h1-line"><span class="h1-inner">Je crée des</span></span>
+                        <span class="h1-line"><span class="h1-inner">expériences</span></span>
+                        <span class="h1-line"><span class="h1-inner h1-accent">qui marquent.</span></span>
+                    </h1>
+                    <p class="hero-p">Motion design, développement web, montage vidéo, communication et maquettage — un profil complet au service de vos projets les plus ambitieux.</p>
+                    <div class="hero-btns">
+                        <a href="#projets" class="btn-chrome" data-cursor="Explorer">
+                            <span class="btn-chrome-text">Voir mes projets</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                        </a>
+                        <a href="#contact" class="btn-ghost">Me contacter</a>
+                    </div>
+                </div>
+                <div class="hero-3d">
+                    <canvas id="metal-sphere"></canvas>
+                </div>
+            </div>
+            <div class="scroll-hint"><div class="scroll-bar"></div><span>Scroll</span></div>
+        </section>
+
+        <!-- DISCIPLINES -->
+        <section id="skills" class="sec sec-alt">
+            <div class="wrap">
+                <div class="sec-head">
+                    <span class="eyebrow"><span class="ey-line"></span>Savoir-faire</span>
+                    <h2 class="sec-title">Cinq disciplines,<br><em>une vision.</em></h2>
+                </div>
+                <div class="skills-row">
+                    <div class="skill-tile chrome-border" data-cursor="01">
+                        <div class="tile-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="24" cy="24" r="18"/><path d="M16 20l4 8 4-12 4 8 4-4"/></svg></div>
+                        <h3>Motion Design</h3>
+                        <p>After Effects, Cinema 4D, Lottie, animation 2D/3D — du motion graphics au storytelling visuel.</p>
+                    </div>
+                    <div class="skill-tile chrome-border" data-cursor="02">
+                        <div class="tile-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="8" y="8" width="32" height="32" rx="4"/><line x1="8" y1="18" x2="40" y2="18"/><rect x="14" y="24" width="8" height="6" rx="1"/></svg></div>
+                        <h3>Maquettage UI/UX</h3>
+                        <p>Figma, wireframes, prototypage haute fidélité, design systems et tests utilisateurs.</p>
+                    </div>
+                    <div class="skill-tile chrome-border" data-cursor="03">
+                        <div class="tile-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><polyline points="16,14 8,24 16,34"/><polyline points="32,14 40,24 32,34"/><line x1="28" y1="10" x2="20" y2="38"/></svg></div>
+                        <h3>Développement Web</h3>
+                        <p>HTML/CSS/JS, React, Three.js, Node.js — sites et apps modernes, performants et responsive.</p>
+                    </div>
+                    <div class="skill-tile chrome-border" data-cursor="04">
+                        <div class="tile-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="8" y="10" width="32" height="22" rx="3"/><polygon points="20,17 20,27 30,22"/><line x1="16" y1="38" x2="32" y2="38"/></svg></div>
+                        <h3>Montage Vidéo</h3>
+                        <p>Premiere Pro, DaVinci Resolve, color grading, sound design et post-production soignée.</p>
+                    </div>
+                    <div class="skill-tile chrome-border" data-cursor="05">
+                        <div class="tile-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="24" cy="24" r="16"/><path d="M24 8C24 8 16 18 16 24s3.6 8 8 8 8-3.2 8-8S24 8 24 8z"/><line x1="8" y1="24" x2="40" y2="24"/></svg></div>
+                        <h3>Communication</h3>
+                        <p>Stratégie digitale, identité visuelle, social media et création de contenu engageant.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJETS — format éditorial, pas de grille IA -->
+        <section id="projets" class="sec">
+            <div class="wrap">
+                <div class="sec-head">
+                    <span class="eyebrow"><span class="ey-line"></span>Portfolio</span>
+                    <h2 class="sec-title">Travaux sélectionnés.</h2>
+                </div>
+                <div class="proj-list">
+                    <a href="#" class="proj-row" data-cat="motion" data-cursor="Voir">
+                        <span class="proj-num">01</span>
+                        <span class="proj-name">Showreel 2026</span>
+                        <span class="proj-type">Motion Design</span>
+                        <span class="proj-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+                        <div class="proj-thumb" style="--thumb-hue:120">
+                            <div class="proj-thumb-inner">
+                                <span class="thumb-label">Showreel</span>
+                                <span class="thumb-year">2026</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="proj-row" data-cat="dev" data-cursor="Voir">
+                        <span class="proj-num">02</span>
+                        <span class="proj-name">Dashboard Analytics</span>
+                        <span class="proj-type">Développement</span>
+                        <span class="proj-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+                        <div class="proj-thumb" style="--thumb-hue:200">
+                            <div class="proj-thumb-inner">
+                                <span class="thumb-label">Dashboard</span>
+                                <span class="thumb-year">Analytics</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="proj-row" data-cat="video" data-cursor="Voir">
+                        <span class="proj-num">03</span>
+                        <span class="proj-name">Court-métrage Horizon</span>
+                        <span class="proj-type">Montage Vidéo</span>
+                        <span class="proj-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+                        <div class="proj-thumb" style="--thumb-hue:30">
+                            <div class="proj-thumb-inner">
+                                <span class="thumb-label">Horizon</span>
+                                <span class="thumb-year">Film</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="proj-row" data-cat="design" data-cursor="Voir">
+                        <span class="proj-num">04</span>
+                        <span class="proj-name">Refonte App Livraison</span>
+                        <span class="proj-type">Maquettage UI/UX</span>
+                        <span class="proj-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+                        <div class="proj-thumb" style="--thumb-hue:280">
+                            <div class="proj-thumb-inner">
+                                <span class="thumb-label">App</span>
+                                <span class="thumb-year">UI/UX</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="proj-row" data-cat="comm" data-cursor="Voir">
+                        <span class="proj-num">05</span>
+                        <span class="proj-name">Campagne EcoWave</span>
+                        <span class="proj-type">Communication</span>
+                        <span class="proj-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+                        <div class="proj-thumb" style="--thumb-hue:160">
+                            <div class="proj-thumb-inner">
+                                <span class="thumb-label">EcoWave</span>
+                                <span class="thumb-year">Comm</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="proj-row" data-cat="motion" data-cursor="Voir">
+                        <span class="proj-num">06</span>
+                        <span class="proj-name">Generative Art</span>
+                        <span class="proj-type">Motion Design</span>
+                        <span class="proj-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+                        <div class="proj-thumb" style="--thumb-hue:60">
+                            <div class="proj-thumb-inner">
+                                <span class="thumb-label">Gen Art</span>
+                                <span class="thumb-year">2026</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="sec sec-alt">
+            <div class="wrap">
+                <div class="contact-head">
+                    <span class="eyebrow"><span class="ey-line"></span>Contact</span>
+                    <h2 class="sec-title sec-title-lg">Un projet ?<br><em>Parlons-en.</em></h2>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-left">
+                        <p class="contact-body">Ouvert aux collaborations, missions freelance et opportunités. Contactez-moi pour donner vie à vos idées.</p>
+                        <div class="channels">
+                            <a href="mailto:contact@abidar.fr" class="ch" data-cursor="Écrire">
+                                <span class="ch-label">Email</span>
+                                <span class="ch-val">contact@abidar.fr</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                            </a>
+                            <a href="#" class="ch" data-cursor="Ouvrir">
+                                <span class="ch-label">LinkedIn</span>
+                                <span class="ch-val">linkedin.com/in/abidar</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                            </a>
+                            <a href="#" class="ch" data-cursor="Ouvrir">
+                                <span class="ch-label">Behance</span>
+                                <span class="ch-val">behance.net/abidar</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <form id="contact-form" class="form">
+                        <div class="field"><input type="text" id="fn" name="name" required placeholder=" "><label for="fn">Nom complet</label></div>
+                        <div class="field"><input type="email" id="fe" name="email" required placeholder=" "><label for="fe">Adresse email</label></div>
+                        <div class="field">
+                            <select id="fs" name="subject" required>
+                                <option value="" disabled selected></option>
+                                <option value="projet">Proposition de projet</option>
+                                <option value="emploi">Opportunité d'emploi</option>
+                                <option value="freelance">Mission freelance</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                            <label for="fs">Objet</label>
+                        </div>
+                        <div class="field"><textarea id="fm" name="message" rows="4" required placeholder=" "></textarea><label for="fm">Message</label></div>
+                        <button type="submit" class="btn-chrome submit" data-cursor="Envoyer">
+                            <span class="btn-chrome-text">Envoyer</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wrap foot">
+            <span class="foot-name">Abidar</span>
+            <span class="foot-copy">© 2026 — Tous droits réservés</span>
+            <span class="foot-credit">Conçu & développé par mes soins</span>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="assets/js/sphere.js"></script>
+    <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>
