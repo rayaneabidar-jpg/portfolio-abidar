@@ -4,71 +4,146 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin — Portfolio Abidar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; background: #0a1a0a; color: #c8e6c9; min-height: 100vh; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: #080f08; color: #b8c8b0; min-height: 100vh; line-height: 1.5; }
 
-        /* ── Auth screen ── */
+        /* ── Auth ── */
         #auth { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
         #auth.hidden { display: none; }
-        .auth-box { text-align: center; }
-        .auth-box h1 { font-size: 1.5rem; margin-bottom: 24px; color: #90A955; }
-        .auth-box input { background: #1a2e1a; border: 1px solid #2a4a2a; color: #fff; padding: 12px 20px; border-radius: 8px; font-size: 1rem; width: 280px; text-align: center; }
-        .auth-box input:focus { outline: none; border-color: #90A955; }
-        .auth-box button { margin-top: 12px; background: #4F772D; color: #fff; border: none; padding: 10px 32px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; }
-        .auth-box button:hover { background: #90A955; color: #0a1a0a; }
-        .auth-error { color: #e57373; font-size: 0.8rem; margin-top: 8px; }
+        .auth-box { text-align: center; width: 320px; }
+        .auth-logo { font-size: 1.6rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .auth-logo span { color: #90A955; }
+        .auth-sub { font-size: 0.75rem; color: #5a7a5a; margin-bottom: 40px; letter-spacing: 0.1em; text-transform: uppercase; }
+        .auth-input { width: 100%; background: #0f1a0f; border: 1px solid #1a2e1a; color: #fff; padding: 14px 20px; border-radius: 12px; font-size: 0.95rem; font-family: inherit; text-align: center; transition: border-color 0.3s; }
+        .auth-input:focus { outline: none; border-color: #4F772D; }
+        .auth-btn { width: 100%; margin-top: 16px; background: #4F772D; color: #fff; border: none; padding: 14px; border-radius: 12px; cursor: pointer; font-size: 0.9rem; font-family: inherit; font-weight: 500; transition: background 0.3s; }
+        .auth-btn:hover { background: #5a8a35; }
+        .auth-error { color: #cf6679; font-size: 0.78rem; margin-top: 12px; min-height: 20px; }
 
-        /* ── Dashboard ── */
-        #dashboard { display: none; max-width: 900px; margin: 0 auto; padding: 40px 24px; }
-        #dashboard.visible { display: block; }
-        .dash-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; }
-        .dash-header h1 { font-size: 1.4rem; color: #90A955; }
-        .dash-header .btn-group { display: flex; gap: 8px; }
+        /* ── Layout ── */
+        #dashboard { display: none; }
+        #dashboard.visible { display: flex; }
+        .sidebar { width: 240px; min-height: 100vh; background: #0b140b; border-right: 1px solid #152015; padding: 32px 0; position: fixed; top: 0; left: 0; display: flex; flex-direction: column; }
+        .side-logo { font-size: 1.1rem; font-weight: 700; color: #fff; padding: 0 24px; margin-bottom: 40px; }
+        .side-logo span { color: #90A955; }
+        .side-nav { display: flex; flex-direction: column; gap: 2px; padding: 0 12px; }
+        .side-link { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; color: #6a8a6a; font-size: 0.82rem; font-weight: 400; text-decoration: none; transition: all 0.2s; cursor: pointer; }
+        .side-link:hover, .side-link.active { background: #121f12; color: #90A955; }
+        .side-link svg { width: 18px; height: 18px; flex-shrink: 0; }
+        .side-count { margin-left: auto; font-size: 0.7rem; background: #1a2e1a; padding: 2px 8px; border-radius: 10px; color: #5a7a5a; }
+        .side-bottom { margin-top: auto; padding: 0 12px; }
+
+        .main { margin-left: 240px; flex: 1; min-height: 100vh; }
+        .main-header { padding: 32px 48px 0; display: flex; align-items: center; justify-content: space-between; }
+        .main-title { font-size: 1.5rem; font-weight: 600; color: #fff; }
+        .main-content { padding: 32px 48px 80px; }
 
         /* ── Buttons ── */
-        .btn { padding: 8px 20px; border-radius: 8px; border: none; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.2s; }
+        .btn { padding: 10px 22px; border-radius: 10px; border: none; cursor: pointer; font-size: 0.82rem; font-family: inherit; font-weight: 500; transition: all 0.25s; display: inline-flex; align-items: center; gap: 6px; }
         .btn-primary { background: #4F772D; color: #fff; }
-        .btn-primary:hover { background: #90A955; color: #0a1a0a; }
-        .btn-danger { background: transparent; color: #e57373; border: 1px solid #e57373; }
-        .btn-danger:hover { background: #e57373; color: #0a1a0a; }
-        .btn-ghost { background: transparent; color: #90A955; border: 1px solid #2a4a2a; }
-        .btn-ghost:hover { border-color: #90A955; }
-        .btn-sm { padding: 5px 12px; font-size: 0.75rem; }
+        .btn-primary:hover { background: #5a8a35; transform: translateY(-1px); }
+        .btn-outline { background: transparent; color: #7a9a6a; border: 1px solid #1a2e1a; }
+        .btn-outline:hover { border-color: #4F772D; color: #90A955; }
+        .btn-danger { background: transparent; color: #cf6679; border: 1px solid rgba(207,102,121,0.2); }
+        .btn-danger:hover { background: rgba(207,102,121,0.1); }
+        .btn-sm { padding: 7px 14px; font-size: 0.75rem; }
+        .btn-icon { width: 36px; height: 36px; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 10px; background: #121f12; border: 1px solid #1a2e1a; color: #6a8a6a; cursor: pointer; transition: all 0.2s; }
+        .btn-icon:hover { border-color: #4F772D; color: #90A955; }
 
-        /* ── Project list ── */
-        .proj-table { width: 100%; border-collapse: collapse; }
-        .proj-table th { text-align: left; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6a8a6a; padding: 8px 12px; border-bottom: 1px solid #1a2e1a; }
-        .proj-table td { padding: 14px 12px; border-bottom: 1px solid #1a2e1a; font-size: 0.9rem; vertical-align: middle; }
-        .proj-table tr:hover td { background: #112211; }
-        .proj-table .actions { display: flex; gap: 6px; }
-        .hue-dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
+        /* ── Project cards ── */
+        .proj-grid { display: flex; flex-direction: column; gap: 8px; }
 
-        /* ── Modal / Form ── */
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-        .modal-overlay.hidden { display: none; }
-        .modal { background: #0f1f0f; border: 1px solid #2a4a2a; border-radius: 16px; padding: 32px; width: 100%; max-width: 500px; }
-        .modal h2 { font-size: 1.1rem; color: #90A955; margin-bottom: 24px; }
-        .field { margin-bottom: 16px; }
-        .field label { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6a8a6a; margin-bottom: 6px; }
-        .field input, .field select { width: 100%; background: #1a2e1a; border: 1px solid #2a4a2a; color: #fff; padding: 10px 14px; border-radius: 8px; font-size: 0.9rem; }
-        .field input:focus, .field select:focus { outline: none; border-color: #90A955; }
-        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 24px; }
+        .proj-card {
+            display: grid;
+            grid-template-columns: 48px 1fr auto auto auto;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 24px;
+            background: #0d180d;
+            border: 1px solid #152015;
+            border-radius: 14px;
+            transition: all 0.25s;
+        }
+        .proj-card:hover { border-color: #1a2e1a; background: #101c10; }
 
-        /* ── GitHub config ── */
-        .config-bar { background: #112211; border: 1px solid #1a2e1a; border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; }
-        .config-bar summary { cursor: pointer; color: #6a8a6a; font-size: 0.8rem; }
-        .config-bar summary:hover { color: #90A955; }
-        .config-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
-        .config-fields input { background: #0a1a0a; border: 1px solid #2a4a2a; color: #fff; padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; }
-        .config-fields input:focus { outline: none; border-color: #90A955; }
-        .config-fields label { font-size: 0.65rem; text-transform: uppercase; color: #6a8a6a; letter-spacing: 0.08em; margin-bottom: 4px; display: block; }
+        .proj-card-num { font-size: 0.75rem; font-weight: 600; color: #3a5a3a; letter-spacing: 0.05em; }
+        .proj-card-info { min-width: 0; }
+        .proj-card-name { font-size: 0.95rem; font-weight: 500; color: #e0e8dc; margin-bottom: 2px; }
+        .proj-card-meta { font-size: 0.72rem; color: #5a7a5a; display: flex; align-items: center; gap: 12px; }
+        .proj-card-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: #2a4a2a; }
+        .proj-card-hue { width: 20px; height: 20px; border-radius: 6px; border: 2px solid #1a2e1a; }
+        .proj-card-media { font-size: 0.7rem; color: #4a6a4a; display: flex; gap: 8px; }
+        .proj-card-media span { background: #121f12; padding: 3px 8px; border-radius: 6px; }
+        .proj-card-actions { display: flex; gap: 6px; }
 
-        /* ── Status ── */
-        .toast { position: fixed; bottom: 24px; right: 24px; background: #1a2e1a; border: 1px solid #4F772D; color: #c8e6c9; padding: 12px 20px; border-radius: 10px; font-size: 0.85rem; transform: translateY(100px); opacity: 0; transition: all 0.3s ease; z-index: 2000; }
+        .empty-state { text-align: center; padding: 80px 24px; color: #3a5a3a; }
+        .empty-state h3 { font-size: 1rem; font-weight: 500; color: #5a7a5a; margin-bottom: 8px; }
+        .empty-state p { font-size: 0.82rem; margin-bottom: 24px; }
+
+        /* ── Editor (replaces modal) ── */
+        #editor { display: none; }
+        #editor.visible { display: block; }
+        #project-list.hidden { display: none; }
+
+        .editor-back { display: inline-flex; align-items: center; gap: 6px; color: #5a7a5a; font-size: 0.8rem; cursor: pointer; margin-bottom: 32px; transition: color 0.2s; background: none; border: none; font-family: inherit; }
+        .editor-back:hover { color: #90A955; }
+        .editor-title { font-size: 1.3rem; font-weight: 600; color: #fff; margin-bottom: 40px; }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; max-width: 900px; }
+        .form-section { display: flex; flex-direction: column; gap: 24px; }
+        .form-section-title { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: #3a5a3a; padding-bottom: 8px; border-bottom: 1px solid #152015; margin-bottom: 4px; }
+
+        .field { display: flex; flex-direction: column; gap: 8px; }
+        .field label { font-size: 0.72rem; font-weight: 500; color: #6a8a6a; }
+        .field input, .field select, .field textarea {
+            width: 100%;
+            background: #0b140b;
+            border: 1px solid #1a2e1a;
+            color: #d0dcc8;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: #4F772D; }
+        .field textarea { resize: vertical; min-height: 80px; }
+        .field .hint { font-size: 0.68rem; color: #3a5a3a; }
+        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        .hue-slider { width: 100%; accent-color: #4F772D; height: 6px; }
+        .hue-info { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+        .hue-dot { width: 20px; height: 20px; border-radius: 6px; border: 2px solid #1a2e1a; }
+        .hue-val { font-size: 0.75rem; color: #5a7a5a; }
+
+        .form-footer { display: flex; gap: 12px; justify-content: flex-end; padding-top: 40px; border-top: 1px solid #152015; margin-top: 16px; max-width: 900px; }
+
+        /* ── Config ── */
+        .config-section { margin-top: 48px; padding-top: 32px; border-top: 1px solid #121f12; }
+        .config-toggle { display: flex; align-items: center; gap: 8px; color: #3a5a3a; font-size: 0.78rem; cursor: pointer; background: none; border: none; font-family: inherit; transition: color 0.2s; }
+        .config-toggle:hover { color: #6a8a6a; }
+        .config-toggle svg { width: 14px; height: 14px; transition: transform 0.2s; }
+        .config-fields { display: none; margin-top: 16px; }
+        .config-fields.open { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: end; }
+        .config-fields .field input { font-size: 0.8rem; padding: 10px 14px; }
+
+        /* ── Toast ── */
+        .toast { position: fixed; bottom: 24px; right: 24px; background: #121f12; border: 1px solid #2a4a2a; color: #b8c8b0; padding: 14px 24px; border-radius: 12px; font-size: 0.82rem; transform: translateY(100px); opacity: 0; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); z-index: 2000; font-family: inherit; }
         .toast.show { transform: translateY(0); opacity: 1; }
-        .toast.error { border-color: #e57373; color: #e57373; }
+        .toast.error { border-color: #cf6679; color: #cf6679; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .main { margin-left: 0; }
+            .main-header, .main-content { padding-left: 24px; padding-right: 24px; }
+            .form-grid { grid-template-columns: 1fr; gap: 32px; }
+            .proj-card { grid-template-columns: 1fr; gap: 12px; }
+            .proj-card-num { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -76,11 +151,11 @@
 <!-- AUTH -->
 <div id="auth">
     <div class="auth-box">
-        <h1>Portfolio Admin</h1>
+        <div class="auth-logo">Abidar<span>.</span></div>
+        <div class="auth-sub">Administration</div>
         <form id="auth-form">
-            <input type="password" id="auth-pass" placeholder="Mot de passe" autocomplete="current-password">
-            <br>
-            <button type="submit" class="btn btn-primary">Connexion</button>
+            <input class="auth-input" type="password" id="auth-pass" placeholder="Mot de passe" autocomplete="current-password">
+            <button class="auth-btn" type="submit">Se connecter</button>
             <div class="auth-error" id="auth-error"></div>
         </form>
     </div>
@@ -88,90 +163,137 @@
 
 <!-- DASHBOARD -->
 <div id="dashboard">
-    <div class="dash-header">
-        <h1>Projets</h1>
-        <div class="btn-group">
-            <button class="btn btn-ghost" id="btn-preview" onclick="window.open('index.html','_blank')">Voir le site</button>
-            <button class="btn btn-primary" id="btn-add">+ Ajouter</button>
+    <aside class="sidebar">
+        <div class="side-logo">Abidar<span>.</span></div>
+        <nav class="side-nav">
+            <a class="side-link active" id="nav-projects">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+                Projets
+                <span class="side-count" id="proj-count">0</span>
+            </a>
+            <a class="side-link" onclick="window.open('index.html','_blank')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Voir le site
+            </a>
+        </nav>
+        <div class="side-bottom">
+            <div class="config-section" style="border:none;margin:0;padding:0">
+                <button class="config-toggle" id="config-toggle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                    GitHub
+                </button>
+                <div class="config-fields" id="config-fields">
+                    <div class="field">
+                        <label>Token</label>
+                        <input type="password" id="gh-token" placeholder="ghp_...">
+                    </div>
+                    <div class="field">
+                        <label>Repo</label>
+                        <input type="text" id="gh-repo" placeholder="user/repo">
+                    </div>
+                    <button class="btn btn-outline btn-sm" id="btn-save-config" style="grid-column:1/-1">Sauvegarder</button>
+                </div>
+            </div>
         </div>
-    </div>
+    </aside>
 
-    <details class="config-bar">
-        <summary>Configuration GitHub (pour sauvegarder en ligne)</summary>
-        <div class="config-fields">
-            <div>
-                <label>GitHub Token</label>
-                <input type="password" id="gh-token" placeholder="ghp_xxxx...">
+    <div class="main">
+        <!-- PROJECT LIST VIEW -->
+        <div id="project-list">
+            <div class="main-header">
+                <h1 class="main-title">Projets</h1>
+                <button class="btn btn-primary" id="btn-add">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    Nouveau projet
+                </button>
             </div>
-            <div>
-                <label>Repo (user/repo)</label>
-                <input type="text" id="gh-repo" placeholder="rayaneabidar-jpg/portfolio-abidar">
+            <div class="main-content">
+                <div class="proj-grid" id="proj-grid"></div>
             </div>
         </div>
-        <button class="btn btn-ghost btn-sm" style="margin-top:12px" id="btn-save-config">Sauvegarder config</button>
-    </details>
 
-    <table class="proj-table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Nom</th>
-                <th>Type</th>
-                <th>Couleur</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="proj-tbody"></tbody>
-    </table>
-</div>
+        <!-- EDITOR VIEW -->
+        <div id="editor">
+            <div class="main-header">
+                <button class="editor-back" id="editor-back">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                    Retour
+                </button>
+            </div>
+            <div class="main-content">
+                <h2 class="editor-title" id="editor-title">Nouveau projet</h2>
+                <form id="proj-form">
+                    <input type="hidden" id="f-id">
+                    <div class="form-grid">
+                        <div class="form-section">
+                            <div class="form-section-title">Informations</div>
+                            <div class="field">
+                                <label>Nom du projet</label>
+                                <input type="text" id="f-name" required placeholder="Mon super projet">
+                            </div>
+                            <div class="field">
+                                <label>Type</label>
+                                <select id="f-type">
+                                    <option value="Motion Design">Motion Design</option>
+                                    <option value="Développement">Développement</option>
+                                    <option value="Montage Vidéo">Montage Vidéo</option>
+                                    <option value="Maquettage UI/UX">Maquettage UI/UX</option>
+                                    <option value="Communication">Communication</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label>Description</label>
+                                <textarea id="f-desc" rows="4" placeholder="Décris le projet en quelques phrases..."></textarea>
+                            </div>
+                            <div class="field">
+                                <label>URL du projet</label>
+                                <input type="text" id="f-url" placeholder="https://...">
+                                <span class="hint">Lien vers le projet en ligne ou Behance</span>
+                            </div>
+                        </div>
 
-<!-- MODAL -->
-<div class="modal-overlay hidden" id="modal">
-    <div class="modal">
-        <h2 id="modal-title">Ajouter un projet</h2>
-        <form id="proj-form">
-            <input type="hidden" id="f-id">
-            <div class="field">
-                <label>Nom du projet</label>
-                <input type="text" id="f-name" required placeholder="Mon super projet">
+                        <div class="form-section">
+                            <div class="form-section-title">Apparence</div>
+                            <div class="field-row">
+                                <div class="field">
+                                    <label>Label miniature</label>
+                                    <input type="text" id="f-thumb-label" required placeholder="Showreel">
+                                </div>
+                                <div class="field">
+                                    <label>Sous-label</label>
+                                    <input type="text" id="f-thumb-year" required placeholder="2026">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>Teinte couleur</label>
+                                <input class="hue-slider" type="range" id="f-hue" min="0" max="360" value="120">
+                                <div class="hue-info">
+                                    <span class="hue-dot" id="hue-preview"></span>
+                                    <span class="hue-val" id="hue-value">120</span>
+                                </div>
+                            </div>
+
+                            <div class="form-section-title" style="margin-top:16px">Médias</div>
+                            <div class="field">
+                                <label>Images</label>
+                                <textarea id="f-images" rows="4" placeholder="Une URL par ligne&#10;https://example.com/img1.jpg&#10;https://example.com/img2.jpg" style="font-family:monospace;font-size:0.8rem"></textarea>
+                                <span class="hint">Une URL d'image par ligne</span>
+                            </div>
+                            <div class="field">
+                                <label>Vidéo</label>
+                                <input type="text" id="f-video" placeholder="https://example.com/video.mp4">
+                                <span class="hint">URL directe du fichier vidéo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="button" class="btn btn-outline" id="btn-cancel">Annuler</button>
+                        <button type="submit" class="btn btn-primary" id="btn-submit">Créer le projet</button>
+                    </div>
+                </form>
             </div>
-            <div class="field">
-                <label>Type</label>
-                <select id="f-type">
-                    <option value="Motion Design">Motion Design</option>
-                    <option value="Développement">Développement</option>
-                    <option value="Montage Vidéo">Montage Vidéo</option>
-                    <option value="Maquettage UI/UX">Maquettage UI/UX</option>
-                    <option value="Communication">Communication</option>
-                </select>
-            </div>
-            <div class="field">
-                <label>URL du projet</label>
-                <input type="text" id="f-url" placeholder="https://...">
-            </div>
-            <div class="field-row">
-                <div class="field">
-                    <label>Label miniature</label>
-                    <input type="text" id="f-thumb-label" required placeholder="Showreel">
-                </div>
-                <div class="field">
-                    <label>Sous-label</label>
-                    <input type="text" id="f-thumb-year" required placeholder="2026">
-                </div>
-            </div>
-            <div class="field">
-                <label>Teinte couleur (0-360)</label>
-                <input type="range" id="f-hue" min="0" max="360" value="120" style="width:100%;accent-color:#90A955">
-                <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
-                    <span class="hue-dot" id="hue-preview"></span>
-                    <span id="hue-value" style="font-size:0.8rem;color:#6a8a6a">120</span>
-                </div>
-            </div>
-            <div class="modal-actions">
-                <button type="button" class="btn btn-ghost" id="btn-cancel">Annuler</button>
-                <button type="submit" class="btn btn-primary" id="btn-submit">Ajouter</button>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
@@ -179,24 +301,18 @@
 
 <script>
 (function() {
-    // ── Config ──
-    const PASS_HASH = '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'; // "password" — change this
+    const PASS_HASH = '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8';
     const CAT_MAP = {
-        'Motion Design': 'motion',
-        'Développement': 'dev',
-        'Montage Vidéo': 'video',
-        'Maquettage UI/UX': 'design',
-        'Communication': 'comm'
+        'Motion Design': 'motion', 'Développement': 'dev',
+        'Montage Vidéo': 'video', 'Maquettage UI/UX': 'design', 'Communication': 'comm'
     };
-
     let projects = [];
 
-    // ── Utils ──
+    // Utils
     async function sha256(str) {
         const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
         return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
     }
-
     function toast(msg, error = false) {
         const el = document.getElementById('toast');
         el.textContent = msg;
@@ -204,11 +320,10 @@
         setTimeout(() => el.className = 'toast', 3000);
     }
 
-    // ── Auth ──
+    // Auth
     document.getElementById('auth-form').addEventListener('submit', async (e) => {
         e.preventDefault();
-        const pass = document.getElementById('auth-pass').value;
-        const hash = await sha256(pass);
+        const hash = await sha256(document.getElementById('auth-pass').value);
         if (hash === PASS_HASH) {
             document.getElementById('auth').classList.add('hidden');
             document.getElementById('dashboard').classList.add('visible');
@@ -219,8 +334,6 @@
             document.getElementById('auth-error').textContent = 'Mot de passe incorrect';
         }
     });
-
-    // Auto-login if session
     if (sessionStorage.getItem('admin-auth')) {
         document.getElementById('auth').classList.add('hidden');
         document.getElementById('dashboard').classList.add('visible');
@@ -228,108 +341,152 @@
         loadProjects();
     }
 
-    // ── GitHub config ──
+    // Config
     function loadConfig() {
-        const token = localStorage.getItem('gh-token') || '';
-        const repo = localStorage.getItem('gh-repo') || 'rayaneabidar-jpg/portfolio-abidar';
-        document.getElementById('gh-token').value = token;
-        document.getElementById('gh-repo').value = repo;
+        document.getElementById('gh-token').value = localStorage.getItem('gh-token') || '';
+        document.getElementById('gh-repo').value = localStorage.getItem('gh-repo') || 'rayaneabidar-jpg/portfolio-abidar';
     }
-
-    document.getElementById('btn-save-config').addEventListener('click', () => {
-        localStorage.setItem('gh-token', document.getElementById('gh-token').value);
-        localStorage.setItem('gh-repo', document.getElementById('gh-repo').value);
-        toast('Configuration sauvegardée');
+    document.getElementById('btn-save-config').addEventListener('click', async () => {
+        const token = document.getElementById('gh-token').value.trim();
+        const repo = document.getElementById('gh-repo').value.trim();
+        localStorage.setItem('gh-token', token);
+        localStorage.setItem('gh-repo', repo);
+        if (token && repo) {
+            try {
+                const res = await fetch(`https://api.github.com/repos/${repo}`, {
+                    headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+                });
+                if (res.ok) { toast('✅ Connecté à GitHub !'); }
+                else { toast('❌ Token ou repo invalide', true); }
+            } catch { toast('❌ Erreur de connexion', true); }
+        } else {
+            toast('Configuration sauvegardée (mode hors-ligne)');
+        }
+    });
+    document.getElementById('config-toggle').addEventListener('click', () => {
+        document.getElementById('config-fields').classList.toggle('open');
     });
 
-    // ── Load projects ──
+    // Load
     async function loadProjects() {
         try {
             const res = await fetch('projects.json?t=' + Date.now());
             projects = await res.json();
-        } catch {
-            projects = [];
+        } catch { projects = []; }
+        renderGrid();
+    }
+
+    function renderGrid() {
+        const grid = document.getElementById('proj-grid');
+        document.getElementById('proj-count').textContent = projects.length;
+
+        if (!projects.length) {
+            grid.innerHTML = '<div class="empty-state"><h3>Aucun projet</h3><p>Commence par ajouter ton premier projet.</p></div>';
+            return;
         }
-        renderTable();
+
+        grid.innerHTML = projects.map((p, i) => {
+            const imgCount = (p.images || []).length;
+            const hasVideo = p.video ? true : false;
+            return `
+            <div class="proj-card">
+                <span class="proj-card-num">${String(i + 1).padStart(2, '0')}</span>
+                <div class="proj-card-info">
+                    <div class="proj-card-name">${p.name}</div>
+                    <div class="proj-card-meta">
+                        <span>${p.type}</span>
+                        ${p.description ? '<span class="dot"></span><span>' + p.description.substring(0, 50) + '...</span>' : ''}
+                    </div>
+                </div>
+                <span class="proj-card-hue" style="background:hsl(${p.thumbHue},50%,35%)"></span>
+                <div class="proj-card-media">
+                    ${imgCount ? '<span>' + imgCount + ' img</span>' : ''}
+                    ${hasVideo ? '<span>1 vid</span>' : ''}
+                    ${!imgCount && !hasVideo ? '<span style="opacity:0.4">—</span>' : ''}
+                </div>
+                <div class="proj-card-actions">
+                    <button class="btn-icon" onclick="editProject(${p.id})" title="Modifier">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </button>
+                    <button class="btn-icon" onclick="deleteProject(${p.id})" title="Supprimer" style="color:#cf6679">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                    </button>
+                </div>
+            </div>`;
+        }).join('');
     }
 
-    function renderTable() {
-        const tbody = document.getElementById('proj-tbody');
-        tbody.innerHTML = projects.map((p, i) => `
-            <tr>
-                <td>${String(i + 1).padStart(2, '0')}</td>
-                <td>${p.name}</td>
-                <td>${p.type}</td>
-                <td><span class="hue-dot" style="background:hsl(${p.thumbHue},50%,40%)"></span></td>
-                <td class="actions">
-                    <button class="btn btn-ghost btn-sm" onclick="editProject(${p.id})">Modifier</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteProject(${p.id})">Supprimer</button>
-                </td>
-            </tr>
-        `).join('');
+    // Views
+    function showList() {
+        document.getElementById('project-list').classList.remove('hidden');
+        document.getElementById('editor').classList.remove('visible');
+    }
+    function showEditor(title) {
+        document.getElementById('project-list').classList.add('hidden');
+        document.getElementById('editor').classList.add('visible');
+        document.getElementById('editor-title').textContent = title;
     }
 
-    // ── Modal ──
-    const modal = document.getElementById('modal');
-    const form = document.getElementById('proj-form');
+    // Hue
     const hueInput = document.getElementById('f-hue');
     const huePreview = document.getElementById('hue-preview');
     const hueValue = document.getElementById('hue-value');
-
     hueInput.addEventListener('input', () => {
-        huePreview.style.background = `hsl(${hueInput.value},50%,40%)`;
+        huePreview.style.background = `hsl(${hueInput.value},50%,35%)`;
         hueValue.textContent = hueInput.value;
     });
 
+    // Add
     document.getElementById('btn-add').addEventListener('click', () => {
-        document.getElementById('modal-title').textContent = 'Ajouter un projet';
-        document.getElementById('btn-submit').textContent = 'Ajouter';
-        form.reset();
+        document.getElementById('proj-form').reset();
         document.getElementById('f-id').value = '';
+        document.getElementById('f-desc').value = '';
+        document.getElementById('f-images').value = '';
+        document.getElementById('f-video').value = '';
         hueInput.value = 120;
-        huePreview.style.background = 'hsl(120,50%,40%)';
+        huePreview.style.background = 'hsl(120,50%,35%)';
         hueValue.textContent = '120';
-        modal.classList.remove('hidden');
+        document.getElementById('btn-submit').textContent = 'Créer le projet';
+        showEditor('Nouveau projet');
     });
 
-    document.getElementById('btn-cancel').addEventListener('click', () => {
-        modal.classList.add('hidden');
-    });
+    // Back / Cancel
+    document.getElementById('editor-back').addEventListener('click', showList);
+    document.getElementById('btn-cancel').addEventListener('click', showList);
 
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.classList.add('hidden');
-    });
-
-    // ── Edit ──
+    // Edit
     window.editProject = function(id) {
         const p = projects.find(x => x.id === id);
         if (!p) return;
-        document.getElementById('modal-title').textContent = 'Modifier le projet';
-        document.getElementById('btn-submit').textContent = 'Sauvegarder';
         document.getElementById('f-id').value = p.id;
         document.getElementById('f-name').value = p.name;
         document.getElementById('f-type').value = p.type;
-        document.getElementById('f-url').value = p.url || '#';
+        document.getElementById('f-url').value = p.url || '';
         document.getElementById('f-thumb-label').value = p.thumbLabel;
         document.getElementById('f-thumb-year').value = p.thumbYear;
+        document.getElementById('f-desc').value = p.description || '';
+        document.getElementById('f-images').value = (p.images || []).join('\n');
+        document.getElementById('f-video').value = p.video || '';
         hueInput.value = p.thumbHue;
-        huePreview.style.background = `hsl(${p.thumbHue},50%,40%)`;
+        huePreview.style.background = `hsl(${p.thumbHue},50%,35%)`;
         hueValue.textContent = p.thumbHue;
-        modal.classList.remove('hidden');
+        document.getElementById('btn-submit').textContent = 'Sauvegarder';
+        showEditor('Modifier — ' + p.name);
     };
 
-    // ── Delete ──
+    // Delete
     window.deleteProject = function(id) {
         if (!confirm('Supprimer ce projet ?')) return;
         projects = projects.filter(x => x.id !== id);
-        renderTable();
+        renderGrid();
         saveProjects();
     };
 
-    // ── Submit ──
-    form.addEventListener('submit', (e) => {
+    // Submit
+    document.getElementById('proj-form').addEventListener('submit', (e) => {
         e.preventDefault();
         const id = document.getElementById('f-id').value;
+        const imagesRaw = document.getElementById('f-images').value.trim();
         const data = {
             name: document.getElementById('f-name').value,
             type: document.getElementById('f-type').value,
@@ -337,83 +494,72 @@
             url: document.getElementById('f-url').value || '#',
             thumbLabel: document.getElementById('f-thumb-label').value,
             thumbYear: document.getElementById('f-thumb-year').value,
-            thumbHue: parseInt(hueInput.value)
+            thumbHue: parseInt(hueInput.value),
+            description: document.getElementById('f-desc').value,
+            images: imagesRaw ? imagesRaw.split('\n').map(s => s.trim()).filter(Boolean) : [],
+            video: document.getElementById('f-video').value.trim()
         };
 
         if (id) {
-            // Edit
             const idx = projects.findIndex(x => x.id === parseInt(id));
-            if (idx >= 0) {
-                data.id = parseInt(id);
-                projects[idx] = data;
-            }
+            if (idx >= 0) { data.id = parseInt(id); projects[idx] = data; }
         } else {
-            // Add
             data.id = projects.length ? Math.max(...projects.map(x => x.id)) + 1 : 1;
             projects.push(data);
         }
 
-        modal.classList.add('hidden');
-        renderTable();
+        showList();
+        renderGrid();
         saveProjects();
+        toast(id ? 'Projet mis à jour' : 'Projet créé');
     });
 
-    // ── Save ──
+    // Save
     async function saveProjects() {
-        // Save locally (download)
         const json = JSON.stringify(projects, null, 2);
-
-        // Try GitHub API
         const token = localStorage.getItem('gh-token');
         const repo = localStorage.getItem('gh-repo');
 
         if (token && repo) {
             try {
-                // Get current file SHA
                 const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/projects.json`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
                 });
+                if (!getRes.ok) {
+                    const err = await getRes.json();
+                    throw new Error(err.message || `GitHub GET error ${getRes.status}`);
+                }
                 const getData = await getRes.json();
-                const sha = getData.sha;
-
-                // Update file
                 const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/projects.json`, {
                     method: 'PUT',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github.v3+json' },
                     body: JSON.stringify({
                         message: 'Update projects from admin panel',
                         content: btoa(unescape(encodeURIComponent(json))),
-                        sha: sha
+                        sha: getData.sha
                     })
                 });
-
-                if (putRes.ok) {
-                    toast('Sauvegardé et publié sur GitHub');
-                } else {
-                    throw new Error('GitHub API error');
+                if (putRes.ok) { toast('✅ Publié sur GitHub !'); }
+                else {
+                    const err = await putRes.json();
+                    throw new Error(err.message || `GitHub PUT error ${putRes.status}`);
                 }
-            } catch (err) {
-                console.error(err);
-                toast('Erreur GitHub — téléchargement local', true);
+            } catch(e) {
+                toast('Erreur GitHub : ' + e.message, true);
+                console.error('GitHub sync error:', e);
                 downloadJSON(json);
             }
         } else {
-            // No GitHub config — download file
             downloadJSON(json);
-            toast('Fichier téléchargé (configurer GitHub pour publier directement)');
+            toast('Fichier téléchargé — configurer GitHub pour publier directement');
         }
     }
 
     function downloadJSON(json) {
-        const blob = new Blob([json], { type: 'application/json' });
         const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
+        a.href = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
         a.download = 'projects.json';
         a.click();
-        URL.revokeObjectURL(a.href);
     }
 })();
 </script>
