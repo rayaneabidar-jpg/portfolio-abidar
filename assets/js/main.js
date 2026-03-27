@@ -127,8 +127,8 @@
     function initScrollAnims() {
         gsap.registerPlugin(ScrollTrigger);
 
-        gsap.utils.toArray('.skill-tile').forEach((el, i) => {
-            gsap.to(el, { opacity: 1, y: 0, duration: 0.6, delay: i * 0.08, ease: 'power2.out',
+        gsap.utils.toArray('.acc-panel').forEach((el, i) => {
+            gsap.from(el, { opacity: 0, x: -20, duration: 0.5, delay: i * 0.08, ease: 'power2.out',
                 scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
         });
 
@@ -182,6 +182,37 @@
         });
     }
 
+    /* ─── HERO REEL PORTAL ─── */
+    function initHeroPortal() {
+        const portal = document.getElementById('hero-portal');
+        if (!portal) return;
+        const frame = portal.querySelector('.portal-frame');
+
+        // 3D tilt on mousemove
+        frame.addEventListener('mousemove', e => {
+            const rect = frame.getBoundingClientRect();
+            const cx = (e.clientX - rect.left) / rect.width - 0.5;
+            const cy = (e.clientY - rect.top) / rect.height - 0.5;
+            frame.style.transform = `perspective(800px) rotateY(${cx * 12}deg) rotateX(${-cy * 8}deg) scale(1.03)`;
+        });
+
+        frame.addEventListener('mouseleave', () => {
+            frame.style.transform = '';
+        });
+
+        // Hide fallback if video loads
+        const video = portal.querySelector('.portal-video');
+        const fallback = portal.querySelector('.portal-fallback');
+        if (video && fallback) {
+            video.addEventListener('playing', () => { fallback.style.display = 'none'; });
+            video.addEventListener('error', () => { fallback.style.display = 'flex'; });
+            // If no src, show fallback
+            if (!video.querySelector('source[src]') || !video.querySelector('source').src) {
+                fallback.style.display = 'flex';
+            }
+        }
+    }
+
     /* ─── INIT ─── */
     document.addEventListener('DOMContentLoaded', () => {
         playIntro();
@@ -190,5 +221,6 @@
         initScrollAnims();
         initForm();
         initProjThumbs();
+        initHeroPortal();
     });
 })();

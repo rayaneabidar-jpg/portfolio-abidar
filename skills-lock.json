@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "3d-web-experience": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "computedHash": "18b4f9dca7aa13d0f65938ed926c7865d635d74c58ea60291e313722f1d3a9dd"
+    }
+  }
+}

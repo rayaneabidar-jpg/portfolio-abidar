@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(cd /tmp)",
+      "Bash(mkdir -p carousel metal)",
+      "Bash(unzip -o \"F:/Users/owksa/Downloads/pure-css-3d-animated-carouselminimal-code-heavily-commented.zip\" -d carousel)",
+      "Bash(unzip -o \"F:/Users/owksa/Downloads/liquid-metal-button.zip\" -d metal)",
+      "Read(//tmp/**)",
+      "Read(//f/Users/owksa/**)",
+      "Bash(python -c \"import zipfile; z=zipfile.ZipFile\\(''liquid-metal-button.zip''\\); z.extractall\\(''liquid-metal-button-extract''\\); print\\([f.filename for f in z.filelist]\\)\")",
+      "Bash(gh auth:*)",
+      "Bash(gh repo:*)",
+      "Bash(npx skills:*)"
+    ]
+  }
+}
