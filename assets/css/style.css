@@ -957,43 +957,32 @@ body.cur-hover .cur-dot { transform: translate(-50%, -50%) scale(1.5); }
 .proj-thumb-inner {
     width: 100%;
     height: 100%;
-    background:
-        linear-gradient(135deg,
-            hsl(var(--thumb-hue), 30%, 12%),
-            hsl(var(--thumb-hue), 25%, 20%),
-            hsl(var(--thumb-hue), 20%, 8%)
-        );
+    background-size: cover;
+    background-position: center;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 4px;
     position: relative;
 }
 
-/* Subtle chrome overlay on thumbnail */
+/* Dark overlay */
 .proj-thumb-inner::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: var(--chrome-fill-2);
-    opacity: 0.04;
+    background: rgba(0, 0, 0, 0.55);
     pointer-events: none;
 }
 
 .thumb-label {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--white);
-    letter-spacing: -0.02em;
-}
-
-.thumb-year {
-    font-size: 0.6rem;
-    font-weight: 400;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-soft);
+    letter-spacing: -0.01em;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 10px;
 }
 
 .proj-thumb.visible {

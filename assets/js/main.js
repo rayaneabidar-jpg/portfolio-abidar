@@ -234,10 +234,9 @@
                         <span class="proj-name">${p.name}</span>
                         <span class="proj-type">${p.type}</span>
                         <span class="proj-arrow">${arrow}</span>
-                        <div class="proj-thumb" style="--thumb-hue:${p.thumbHue}">
-                            <div class="proj-thumb-inner">
-                                <span class="thumb-label">${p.thumbLabel}</span>
-                                <span class="thumb-year">${p.thumbYear}</span>
+                        <div class="proj-thumb">
+                            <div class="proj-thumb-inner" ${p.thumbnail ? `style="background-image:url('${p.thumbnail}')"` : `style="background:linear-gradient(135deg,hsl(${p.thumbHue},30%,12%),hsl(${p.thumbHue},25%,20%),hsl(${p.thumbHue},20%,8%))"`}>
+                                <span class="thumb-label">${p.name}</span>
                             </div>
                         </div>
                     </div>

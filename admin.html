@@ -202,10 +202,16 @@
         <div id="project-list">
             <div class="main-header">
                 <h1 class="main-title">Projets</h1>
-                <button class="btn btn-primary" id="btn-add">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                    Nouveau projet
-                </button>
+                <div style="display:flex;gap:10px;align-items:center">
+                    <button class="btn btn-outline" id="btn-publish" style="color:#90A955;border-color:#2a4a2a">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
+                        Publier sur GitHub
+                    </button>
+                    <button class="btn btn-primary" id="btn-add">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Nouveau projet
+                    </button>
+                </div>
             </div>
             <div class="main-content">
                 <div class="proj-grid" id="proj-grid"></div>
@@ -254,6 +260,11 @@
 
                         <div class="form-section">
                             <div class="form-section-title">Apparence</div>
+                            <div class="field">
+                                <label>Image miniature (URL)</label>
+                                <input type="text" id="f-thumbnail" placeholder="https://images.unsplash.com/photo-...">
+                                <small style="color:var(--text-muted);font-size:0.7rem">Image affichée au survol dans la liste des projets. Laissez vide pour un fond coloré.</small>
+                            </div>
                             <div class="field-row">
                                 <div class="field">
                                     <label>Label miniature</label>
@@ -437,6 +448,14 @@
     });
 
     // Add
+    document.getElementById('btn-publish').addEventListener('click', async () => {
+        const token = localStorage.getItem('gh-token');
+        const repo = localStorage.getItem('gh-repo');
+        if (!token || !repo) { toast('❌ Configure GitHub d\'abord (⚙️ dans la sidebar)', true); return; }
+        toast('Publication en cours...');
+        await saveProjects();
+    });
+
     document.getElementById('btn-add').addEventListener('click', () => {
         document.getElementById('proj-form').reset();
         document.getElementById('f-id').value = '';
@@ -462,6 +481,7 @@
         document.getElementById('f-name').value = p.name;
         document.getElementById('f-type').value = p.type;
         document.getElementById('f-url').value = p.url || '';
+        document.getElementById('f-thumbnail').value = p.thumbnail || '';
         document.getElementById('f-thumb-label').value = p.thumbLabel;
         document.getElementById('f-thumb-year').value = p.thumbYear;
         document.getElementById('f-desc').value = p.description || '';
@@ -492,6 +512,7 @@
             type: document.getElementById('f-type').value,
             category: CAT_MAP[document.getElementById('f-type').value] || 'motion',
             url: document.getElementById('f-url').value || '#',
+            thumbnail: document.getElementById('f-thumbnail').value || '',
             thumbLabel: document.getElementById('f-thumb-label').value,
             thumbYear: document.getElementById('f-thumb-year').value,
             thumbHue: parseInt(hueInput.value),
