@@ -1097,6 +1097,22 @@ body.cur-hover .cur-dot { transform: translate(-50%, -50%) scale(1.5); }
     transform: scale(1.02);
 }
 
+.vid-wrap {
+    position: relative;
+    width: 390px;
+    height: 220px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(144, 169, 85, 0.15);
+}
+.vid-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 .proj-detail-media::-webkit-scrollbar { height: 4px; }
 .proj-detail-media::-webkit-scrollbar-track { background: transparent; }
 .proj-detail-media::-webkit-scrollbar-thumb { background: var(--g2); border-radius: 4px; }

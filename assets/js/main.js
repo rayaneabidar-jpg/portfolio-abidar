@@ -226,7 +226,23 @@
                 const imgs = (p.images || []).map(src =>
                     `<img src="${src}" alt="${p.name}" loading="lazy">`
                 ).join('');
-                const vid = p.video ? `<video src="${p.video}" controls playsinline></video>` : '';
+                let vid = '';
+                if (p.video) {
+                    const url = p.video;
+                    let ytId = null;
+                    const ytMatch = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
+                    if (ytMatch) ytId = ytMatch[1];
+                    let vimeoId = null;
+                    const vimeoMatch = url.match(/vimeo\.com\/(\d+)/);
+                    if (vimeoMatch) vimeoId = vimeoMatch[1];
+                    if (ytId) {
+                        vid = `<div class="vid-wrap"><iframe src="https://www.youtube.com/embed/${ytId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+                    } else if (vimeoId) {
+                        vid = `<div class="vid-wrap"><iframe src="https://player.vimeo.com/video/${vimeoId}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`;
+                    } else {
+                        vid = `<video src="${url}" controls playsinline></video>`;
+                    }
+                }
                 return `
                 <div class="proj-item" data-id="${p.id}">
                     <div class="proj-row" data-cat="${p.category}" data-cursor="Voir">
