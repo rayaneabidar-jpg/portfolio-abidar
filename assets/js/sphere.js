@@ -32,14 +32,14 @@
     scene.add(bottom);
 
     /* ─── Sphere ─── */
-    const geo = new THREE.IcosahedronGeometry(1.3, 64);
+    const geo = new THREE.IcosahedronGeometry(1.3, 48);
     const basePositions = Float32Array.from(geo.attributes.position.array);
 
     const mat = new THREE.MeshStandardMaterial({
-        color: 0x4F772D,
+        color: 0x0a0a0a,
         metalness: 0.95,
-        roughness: 0.08,
-        envMapIntensity: 1.2,
+        roughness: 0.02,
+        envMapIntensity: 0.5,
     });
 
     /* Simple env map via CubeCamera trick — fake green metallic reflections */
@@ -51,17 +51,17 @@
     const envGeo = new THREE.SphereGeometry(5, 32, 32);
     const envMat = new THREE.MeshBasicMaterial({
         side: THREE.BackSide,
-        color: 0x0a1a08,
+        color: 0x030503,
     });
     envScene.add(new THREE.Mesh(envGeo, envMat));
 
     /* Add colored lights to env scene for green reflections */
     const envLights = [
-        { color: 0x90A955, pos: [3, 2, 2], intensity: 2 },
-        { color: 0xECF39E, pos: [-2, 3, -1], intensity: 1.5 },
-        { color: 0x4F772D, pos: [0, -3, 3], intensity: 1.2 },
-        { color: 0xb5d45a, pos: [-3, 0, -2], intensity: 1 },
-        { color: 0x31572C, pos: [2, -2, -3], intensity: 0.8 },
+        { color: 0x4F772D, pos: [3, 2, 2], intensity: 0.6 },
+        { color: 0x90A955, pos: [-2, 3, -1], intensity: 0.3 },
+        { color: 0x31572C, pos: [0, -3, 3], intensity: 0.3 },
+        { color: 0xECF39E, pos: [-3, 0, -2], intensity: 0.15 },
+        { color: 0x1a3a12, pos: [2, -2, -3], intensity: 0.2 },
     ];
     envLights.forEach(l => {
         const light = new THREE.PointLight(l.color, l.intensity, 10);
@@ -182,7 +182,7 @@
         /* Deform sphere based on noise + mouse */
         const pos = geo.attributes.position;
         const mouseInfluence = Math.sqrt(mouseX * mouseX + mouseY * mouseY);
-        const deformStrength = 0.12 + mouseInfluence * 0.15;
+        const deformStrength = 0.06 + mouseInfluence * 0.08;
 
         for (let i = 0; i < pos.count; i++) {
             const bx = basePositions[i * 3];
@@ -201,7 +201,7 @@
 
             /* Mouse-directed bulge */
             const mouseDot = nx * mouseX + ny * mouseY;
-            const mouseBulge = Math.max(0, mouseDot) * mouseInfluence * 0.2;
+            const mouseBulge = Math.max(0, mouseDot) * mouseInfluence * 0.1;
 
             const displacement = len + (noiseVal - 0.5) * deformStrength + mouseBulge;
 

@@ -11,30 +11,33 @@
         const sub = document.querySelector('.intro-sub');
         const fill = document.querySelector('.intro-loader-fill');
 
-        gsap.to(fill, { width: '100%', duration: 2.8, ease: 'power1.inOut' });
+        document.body.style.overflow = 'hidden';
 
-        setTimeout(() => { chars.forEach(c => c.classList.add('assembled')); }, 400);
-        setTimeout(() => { sub.classList.add('show'); }, 1200);
+        gsap.to(fill, { width: '100%', duration: 1.4, ease: 'power1.inOut' });
+
+        setTimeout(() => { chars.forEach(c => c.classList.add('assembled')); }, 200);
+        setTimeout(() => { sub.classList.add('show'); }, 600);
 
         let done = false;
         const dismiss = () => {
             if (done) return;
             done = true;
+            document.body.style.overflow = '';
             const intro = document.getElementById('intro');
-            intro.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            intro.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             intro.style.opacity = '0';
             intro.style.transform = 'scale(1.04)';
             intro.style.pointerEvents = 'none';
-            setTimeout(() => { intro.style.display = 'none'; }, 900);
-            setTimeout(revealPage, 200);
+            setTimeout(() => { intro.style.display = 'none'; }, 600);
+            setTimeout(revealPage, 150);
         };
 
         setTimeout(() => {
             window.addEventListener('wheel', dismiss, { once: true, passive: true });
             window.addEventListener('touchstart', dismiss, { once: true, passive: true });
-        }, 1400);
+        }, 700);
 
-        setTimeout(dismiss, 3800);
+        setTimeout(dismiss, 2000);
     }
 
     function revealPage() {
@@ -299,10 +302,11 @@
 
                 if (!isOpen) {
                     item.classList.add('open');
-                    // Scroll to detail smoothly
                     setTimeout(() => {
-                        detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }, 100);
+                        const rowRect = row.getBoundingClientRect();
+                        const offset = window.scrollY + rowRect.top - 80;
+                        window.scrollTo({ top: offset, behavior: 'smooth' });
+                    }, 450);
                 } else {
                     item.classList.remove('open');
                 }
@@ -316,7 +320,11 @@
     }
 
     /* ─── INIT ─── */
+    window.history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+
     document.addEventListener('DOMContentLoaded', async () => {
+        window.scrollTo(0, 0);
         playIntro();
         initCursor();
         initNav();

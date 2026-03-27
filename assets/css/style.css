@@ -1008,6 +1008,18 @@ body.cur-hover .cur-dot { transform: translate(-50%, -50%) scale(1.5); }
 
 .proj-item.open .proj-row {
     border-color: transparent;
+    border-bottom: 2px solid;
+    border-image: var(--chrome) 1;
+    padding-bottom: 18px;
+}
+
+.proj-item.open .proj-name {
+    background: linear-gradient(105deg, #4F772D, #90A955, #c8e66b, #ECF39E, #4F772D);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: chromeText 3s ease-in-out infinite alternate;
 }
 
 .proj-item.open .proj-row .proj-arrow {
