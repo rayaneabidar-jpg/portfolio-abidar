@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — Portfolio Abidar</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0a1a0a; color: #c8e6c9; min-height: 100vh; }
+
+        /* ── Auth screen ── */
+        #auth { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+        #auth.hidden { display: none; }
+        .auth-box { text-align: center; }
+        .auth-box h1 { font-size: 1.5rem; margin-bottom: 24px; color: #90A955; }
+        .auth-box input { background: #1a2e1a; border: 1px solid #2a4a2a; color: #fff; padding: 12px 20px; border-radius: 8px; font-size: 1rem; width: 280px; text-align: center; }
+        .auth-box input:focus { outline: none; border-color: #90A955; }
+        .auth-box button { margin-top: 12px; background: #4F772D; color: #fff; border: none; padding: 10px 32px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; }
+        .auth-box button:hover { background: #90A955; color: #0a1a0a; }
+        .auth-error { color: #e57373; font-size: 0.8rem; margin-top: 8px; }
+
+        /* ── Dashboard ── */
+        #dashboard { display: none; max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        #dashboard.visible { display: block; }
+        .dash-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; }
+        .dash-header h1 { font-size: 1.4rem; color: #90A955; }
+        .dash-header .btn-group { display: flex; gap: 8px; }
+
+        /* ── Buttons ── */
+        .btn { padding: 8px 20px; border-radius: 8px; border: none; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.2s; }
+        .btn-primary { background: #4F772D; color: #fff; }
+        .btn-primary:hover { background: #90A955; color: #0a1a0a; }
+        .btn-danger { background: transparent; color: #e57373; border: 1px solid #e57373; }
+        .btn-danger:hover { background: #e57373; color: #0a1a0a; }
+        .btn-ghost { background: transparent; color: #90A955; border: 1px solid #2a4a2a; }
+        .btn-ghost:hover { border-color: #90A955; }
+        .btn-sm { padding: 5px 12px; font-size: 0.75rem; }
+
+        /* ── Project list ── */
+        .proj-table { width: 100%; border-collapse: collapse; }
+        .proj-table th { text-align: left; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6a8a6a; padding: 8px 12px; border-bottom: 1px solid #1a2e1a; }
+        .proj-table td { padding: 14px 12px; border-bottom: 1px solid #1a2e1a; font-size: 0.9rem; vertical-align: middle; }
+        .proj-table tr:hover td { background: #112211; }
+        .proj-table .actions { display: flex; gap: 6px; }
+        .hue-dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
+
+        /* ── Modal / Form ── */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        .modal-overlay.hidden { display: none; }
+        .modal { background: #0f1f0f; border: 1px solid #2a4a2a; border-radius: 16px; padding: 32px; width: 100%; max-width: 500px; }
+        .modal h2 { font-size: 1.1rem; color: #90A955; margin-bottom: 24px; }
+        .field { margin-bottom: 16px; }
+        .field label { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6a8a6a; margin-bottom: 6px; }
+        .field input, .field select { width: 100%; background: #1a2e1a; border: 1px solid #2a4a2a; color: #fff; padding: 10px 14px; border-radius: 8px; font-size: 0.9rem; }
+        .field input:focus, .field select:focus { outline: none; border-color: #90A955; }
+        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 24px; }
+
+        /* ── GitHub config ── */
+        .config-bar { background: #112211; border: 1px solid #1a2e1a; border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; }
+        .config-bar summary { cursor: pointer; color: #6a8a6a; font-size: 0.8rem; }
+        .config-bar summary:hover { color: #90A955; }
+        .config-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+        .config-fields input { background: #0a1a0a; border: 1px solid #2a4a2a; color: #fff; padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; }
+        .config-fields input:focus { outline: none; border-color: #90A955; }
+        .config-fields label { font-size: 0.65rem; text-transform: uppercase; color: #6a8a6a; letter-spacing: 0.08em; margin-bottom: 4px; display: block; }
+
+        /* ── Status ── */
+        .toast { position: fixed; bottom: 24px; right: 24px; background: #1a2e1a; border: 1px solid #4F772D; color: #c8e6c9; padding: 12px 20px; border-radius: 10px; font-size: 0.85rem; transform: translateY(100px); opacity: 0; transition: all 0.3s ease; z-index: 2000; }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.error { border-color: #e57373; color: #e57373; }
+    </style>
+</head>
+<body>
+
+<!-- AUTH -->
+<div id="auth">
+    <div class="auth-box">
+        <h1>Portfolio Admin</h1>
+        <form id="auth-form">
+            <input type="password" id="auth-pass" placeholder="Mot de passe" autocomplete="current-password">
+            <br>
+            <button type="submit" class="btn btn-primary">Connexion</button>
+            <div class="auth-error" id="auth-error"></div>
+        </form>
+    </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+    <div class="dash-header">
+        <h1>Projets</h1>
+        <div class="btn-group">
+            <button class="btn btn-ghost" id="btn-preview" onclick="window.open('index.html','_blank')">Voir le site</button>
+            <button class="btn btn-primary" id="btn-add">+ Ajouter</button>
+        </div>
+    </div>
+
+    <details class="config-bar">
+        <summary>Configuration GitHub (pour sauvegarder en ligne)</summary>
+        <div class="config-fields">
+            <div>
+                <label>GitHub Token</label>
+                <input type="password" id="gh-token" placeholder="ghp_xxxx...">
+            </div>
+            <div>
+                <label>Repo (user/repo)</label>
+                <input type="text" id="gh-repo" placeholder="rayaneabidar-jpg/portfolio-abidar">
+            </div>
+        </div>
+        <button class="btn btn-ghost btn-sm" style="margin-top:12px" id="btn-save-config">Sauvegarder config</button>
+    </details>
+
+    <table class="proj-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Couleur</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="proj-tbody"></tbody>
+    </table>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay hidden" id="modal">
+    <div class="modal">
+        <h2 id="modal-title">Ajouter un projet</h2>
+        <form id="proj-form">
+            <input type="hidden" id="f-id">
+            <div class="field">
+                <label>Nom du projet</label>
+                <input type="text" id="f-name" required placeholder="Mon super projet">
+            </div>
+            <div class="field">
+                <label>Type</label>
+                <select id="f-type">
+                    <option value="Motion Design">Motion Design</option>
+                    <option value="Développement">Développement</option>
+                    <option value="Montage Vidéo">Montage Vidéo</option>
+                    <option value="Maquettage UI/UX">Maquettage UI/UX</option>
+                    <option value="Communication">Communication</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>URL du projet</label>
+                <input type="text" id="f-url" placeholder="https://...">
+            </div>
+            <div class="field-row">
+                <div class="field">
+                    <label>Label miniature</label>
+                    <input type="text" id="f-thumb-label" required placeholder="Showreel">
+                </div>
+                <div class="field">
+                    <label>Sous-label</label>
+                    <input type="text" id="f-thumb-year" required placeholder="2026">
+                </div>
+            </div>
+            <div class="field">
+                <label>Teinte couleur (0-360)</label>
+                <input type="range" id="f-hue" min="0" max="360" value="120" style="width:100%;accent-color:#90A955">
+                <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
+                    <span class="hue-dot" id="hue-preview"></span>
+                    <span id="hue-value" style="font-size:0.8rem;color:#6a8a6a">120</span>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-ghost" id="btn-cancel">Annuler</button>
+                <button type="submit" class="btn btn-primary" id="btn-submit">Ajouter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function() {
+    // ── Config ──
+    const PASS_HASH = '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'; // "password" — change this
+    const CAT_MAP = {
+        'Motion Design': 'motion',
+        'Développement': 'dev',
+        'Montage Vidéo': 'video',
+        'Maquettage UI/UX': 'design',
+        'Communication': 'comm'
+    };
+
+    let projects = [];
+
+    // ── Utils ──
+    async function sha256(str) {
+        const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+        return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function toast(msg, error = false) {
+        const el = document.getElementById('toast');
+        el.textContent = msg;
+        el.className = 'toast show' + (error ? ' error' : '');
+        setTimeout(() => el.className = 'toast', 3000);
+    }
+
+    // ── Auth ──
+    document.getElementById('auth-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const pass = document.getElementById('auth-pass').value;
+        const hash = await sha256(pass);
+        if (hash === PASS_HASH) {
+            document.getElementById('auth').classList.add('hidden');
+            document.getElementById('dashboard').classList.add('visible');
+            sessionStorage.setItem('admin-auth', '1');
+            loadConfig();
+            loadProjects();
+        } else {
+            document.getElementById('auth-error').textContent = 'Mot de passe incorrect';
+        }
+    });
+
+    // Auto-login if session
+    if (sessionStorage.getItem('admin-auth')) {
+        document.getElementById('auth').classList.add('hidden');
+        document.getElementById('dashboard').classList.add('visible');
+        loadConfig();
+        loadProjects();
+    }
+
+    // ── GitHub config ──
+    function loadConfig() {
+        const token = localStorage.getItem('gh-token') || '';
+        const repo = localStorage.getItem('gh-repo') || 'rayaneabidar-jpg/portfolio-abidar';
+        document.getElementById('gh-token').value = token;
+        document.getElementById('gh-repo').value = repo;
+    }
+
+    document.getElementById('btn-save-config').addEventListener('click', () => {
+        localStorage.setItem('gh-token', document.getElementById('gh-token').value);
+        localStorage.setItem('gh-repo', document.getElementById('gh-repo').value);
+        toast('Configuration sauvegardée');
+    });
+
+    // ── Load projects ──
+    async function loadProjects() {
+        try {
+            const res = await fetch('projects.json?t=' + Date.now());
+            projects = await res.json();
+        } catch {
+            projects = [];
+        }
+        renderTable();
+    }
+
+    function renderTable() {
+        const tbody = document.getElementById('proj-tbody');
+        tbody.innerHTML = projects.map((p, i) => `
+            <tr>
+                <td>${String(i + 1).padStart(2, '0')}</td>
+                <td>${p.name}</td>
+                <td>${p.type}</td>
+                <td><span class="hue-dot" style="background:hsl(${p.thumbHue},50%,40%)"></span></td>
+                <td class="actions">
+                    <button class="btn btn-ghost btn-sm" onclick="editProject(${p.id})">Modifier</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteProject(${p.id})">Supprimer</button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    // ── Modal ──
+    const modal = document.getElementById('modal');
+    const form = document.getElementById('proj-form');
+    const hueInput = document.getElementById('f-hue');
+    const huePreview = document.getElementById('hue-preview');
+    const hueValue = document.getElementById('hue-value');
+
+    hueInput.addEventListener('input', () => {
+        huePreview.style.background = `hsl(${hueInput.value},50%,40%)`;
+        hueValue.textContent = hueInput.value;
+    });
+
+    document.getElementById('btn-add').addEventListener('click', () => {
+        document.getElementById('modal-title').textContent = 'Ajouter un projet';
+        document.getElementById('btn-submit').textContent = 'Ajouter';
+        form.reset();
+        document.getElementById('f-id').value = '';
+        hueInput.value = 120;
+        huePreview.style.background = 'hsl(120,50%,40%)';
+        hueValue.textContent = '120';
+        modal.classList.remove('hidden');
+    });
+
+    document.getElementById('btn-cancel').addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.classList.add('hidden');
+    });
+
+    // ── Edit ──
+    window.editProject = function(id) {
+        const p = projects.find(x => x.id === id);
+        if (!p) return;
+        document.getElementById('modal-title').textContent = 'Modifier le projet';
+        document.getElementById('btn-submit').textContent = 'Sauvegarder';
+        document.getElementById('f-id').value = p.id;
+        document.getElementById('f-name').value = p.name;
+        document.getElementById('f-type').value = p.type;
+        document.getElementById('f-url').value = p.url || '#';
+        document.getElementById('f-thumb-label').value = p.thumbLabel;
+        document.getElementById('f-thumb-year').value = p.thumbYear;
+        hueInput.value = p.thumbHue;
+        huePreview.style.background = `hsl(${p.thumbHue},50%,40%)`;
+        hueValue.textContent = p.thumbHue;
+        modal.classList.remove('hidden');
+    };
+
+    // ── Delete ──
+    window.deleteProject = function(id) {
+        if (!confirm('Supprimer ce projet ?')) return;
+        projects = projects.filter(x => x.id !== id);
+        renderTable();
+        saveProjects();
+    };
+
+    // ── Submit ──
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const id = document.getElementById('f-id').value;
+        const data = {
+            name: document.getElementById('f-name').value,
+            type: document.getElementById('f-type').value,
+            category: CAT_MAP[document.getElementById('f-type').value] || 'motion',
+            url: document.getElementById('f-url').value || '#',
+            thumbLabel: document.getElementById('f-thumb-label').value,
+            thumbYear: document.getElementById('f-thumb-year').value,
+            thumbHue: parseInt(hueInput.value)
+        };
+
+        if (id) {
+            // Edit
+            const idx = projects.findIndex(x => x.id === parseInt(id));
+            if (idx >= 0) {
+                data.id = parseInt(id);
+                projects[idx] = data;
+            }
+        } else {
+            // Add
+            data.id = projects.length ? Math.max(...projects.map(x => x.id)) + 1 : 1;
+            projects.push(data);
+        }
+
+        modal.classList.add('hidden');
+        renderTable();
+        saveProjects();
+    });
+
+    // ── Save ──
+    async function saveProjects() {
+        // Save locally (download)
+        const json = JSON.stringify(projects, null, 2);
+
+        // Try GitHub API
+        const token = localStorage.getItem('gh-token');
+        const repo = localStorage.getItem('gh-repo');
+
+        if (token && repo) {
+            try {
+                // Get current file SHA
+                const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/projects.json`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const getData = await getRes.json();
+                const sha = getData.sha;
+
+                // Update file
+                const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/projects.json`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: 'Update projects from admin panel',
+                        content: btoa(unescape(encodeURIComponent(json))),
+                        sha: sha
+                    })
+                });
+
+                if (putRes.ok) {
+                    toast('Sauvegardé et publié sur GitHub');
+                } else {
+                    throw new Error('GitHub API error');
+                }
+            } catch (err) {
+                console.error(err);
+                toast('Erreur GitHub — téléchargement local', true);
+                downloadJSON(json);
+            }
+        } else {
+            // No GitHub config — download file
+            downloadJSON(json);
+            toast('Fichier téléchargé (configurer GitHub pour publier directement)');
+        }
+    }
+
+    function downloadJSON(json) {
+        const blob = new Blob([json], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'projects.json';
+        a.click();
+        URL.revokeObjectURL(a.href);
+    }
+})();
+</script>
+</body>
+</html>

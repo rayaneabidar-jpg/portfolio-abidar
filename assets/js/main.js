@@ -213,14 +213,101 @@
         }
     }
 
+    /* ─── LOAD PROJECTS ─── */
+    async function loadProjects() {
+        const list = document.getElementById('proj-list');
+        if (!list) return;
+        try {
+            const res = await fetch('projects.json');
+            const projects = await res.json();
+            const arrow = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>';
+            const close = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+            list.innerHTML = projects.map((p, i) => {
+                const imgs = (p.images || []).map(src =>
+                    `<img src="${src}" alt="${p.name}" loading="lazy">`
+                ).join('');
+                const vid = p.video ? `<video src="${p.video}" controls playsinline></video>` : '';
+                return `
+                <div class="proj-item" data-id="${p.id}">
+                    <div class="proj-row" data-cat="${p.category}" data-cursor="Voir">
+                        <span class="proj-num">${String(i + 1).padStart(2, '0')}</span>
+                        <span class="proj-name">${p.name}</span>
+                        <span class="proj-type">${p.type}</span>
+                        <span class="proj-arrow">${arrow}</span>
+                        <div class="proj-thumb" style="--thumb-hue:${p.thumbHue}">
+                            <div class="proj-thumb-inner">
+                                <span class="thumb-label">${p.thumbLabel}</span>
+                                <span class="thumb-year">${p.thumbYear}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="proj-detail">
+                        <div class="proj-detail-inner">
+                            <div class="proj-detail-head">
+                                <div>
+                                    <span class="proj-detail-type">${p.type}</span>
+                                    <h3 class="proj-detail-title">${p.name}</h3>
+                                </div>
+                                <button class="proj-close" aria-label="Fermer">${close}</button>
+                            </div>
+                            <p class="proj-detail-desc">${p.description || ''}</p>
+                            <div class="proj-detail-media">
+                                ${vid}${imgs}
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+            initProjThumbs();
+            initProjExpand();
+        } catch (e) {
+            console.error('Failed to load projects:', e);
+        }
+    }
+
+    /* ─── PROJECT EXPAND ─── */
+    function initProjExpand() {
+        const items = document.querySelectorAll('.proj-item');
+        items.forEach(item => {
+            const row = item.querySelector('.proj-row');
+            const detail = item.querySelector('.proj-detail');
+            const closeBtn = item.querySelector('.proj-close');
+
+            row.addEventListener('click', (e) => {
+                e.preventDefault();
+                const isOpen = item.classList.contains('open');
+
+                // Close all others
+                items.forEach(it => {
+                    if (it !== item) it.classList.remove('open');
+                });
+
+                if (!isOpen) {
+                    item.classList.add('open');
+                    // Scroll to detail smoothly
+                    setTimeout(() => {
+                        detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 100);
+                } else {
+                    item.classList.remove('open');
+                }
+            });
+
+            closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                item.classList.remove('open');
+            });
+        });
+    }
+
     /* ─── INIT ─── */
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
         playIntro();
         initCursor();
         initNav();
+        await loadProjects();
         initScrollAnims();
         initForm();
-        initProjThumbs();
         initHeroPortal();
     });
 })();

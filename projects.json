@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "name": "Showreel 2026",
+    "type": "Motion Design",
+    "category": "motion",
+    "thumbLabel": "Showreel",
+    "thumbYear": "2026",
+    "thumbHue": 120,
+    "url": "#",
+    "description": "Compilation de mes meilleurs travaux en motion design — transitions cinématiques, animations 3D et identités visuelles animées.",
+    "images": ["https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600", "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600"],
+    "video": ""
+  },
+  {
+    "id": 2,
+    "name": "Dashboard Analytics",
+    "type": "Développement",
+    "category": "dev",
+    "thumbLabel": "Dashboard",
+    "thumbYear": "Analytics",
+    "thumbHue": 200,
+    "url": "#",
+    "description": "Application web de visualisation de données en temps réel — graphiques interactifs, filtres dynamiques et design responsive.",
+    "images": ["https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600", "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600"],
+    "video": ""
+  },
+  {
+    "id": 3,
+    "name": "Court-métrage Horizon",
+    "type": "Montage Vidéo",
+    "category": "video",
+    "thumbLabel": "Horizon",
+    "thumbYear": "Film",
+    "thumbHue": 30,
+    "url": "#",
+    "description": "Court-métrage expérimental mêlant prises de vue réelles et effets visuels — color grading cinématique et sound design immersif.",
+    "images": ["https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600", "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600"],
+    "video": ""
+  },
+  {
+    "id": 4,
+    "name": "Refonte App Livraison",
+    "type": "Maquettage UI/UX",
+    "category": "design",
+    "thumbLabel": "App",
+    "thumbYear": "UI/UX",
+    "thumbHue": 280,
+    "url": "#",
+    "description": "Refonte complète de l'expérience utilisateur d'une app de livraison — recherche utilisateur, wireframes, prototypage et design system.",
+    "images": ["https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600", "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600"],
+    "video": ""
+  },
+  {
+    "id": 5,
+    "name": "Campagne EcoWave",
+    "type": "Communication",
+    "category": "comm",
+    "thumbLabel": "EcoWave",
+    "thumbYear": "Comm",
+    "thumbHue": 160,
+    "url": "#",
+    "description": "Campagne digitale 360° pour une marque éco-responsable — identité visuelle, contenu social media et stratégie d'engagement.",
+    "images": ["https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600", "https://images.unsplash.com/photo-1563986768609-322da13575f2?w=600"],
+    "video": ""
+  },
+  {
+    "id": 6,
+    "name": "Generative Art",
+    "type": "Motion Design",
+    "category": "motion",
+    "thumbLabel": "Gen Art",
+    "thumbYear": "2026",
+    "thumbHue": 60,
+    "url": "#",
+    "description": "Série d'œuvres génératives créées avec code et algorithmes — exploration de formes organiques et patterns infinis.",
+    "images": ["https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=600", "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600"],
+    "video": ""
+  }
+]
