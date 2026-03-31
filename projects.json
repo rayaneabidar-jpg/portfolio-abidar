@@ -1,36 +1,39 @@
 [
   {
-    "name": "Showreel 2026",
-    "type": "Motion Design",
-    "category": "motion",
+    "name": "Ranking Challenge",
+    "type": "Développement",
+    "category": "dev",
     "url": "https://soloq-clean.vercel.app/",
-    "thumbnail": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600",
-    "thumbLabel": "Showreel",
-    "thumbYear": "2026",
+    "thumbnail": "assets/img/projects/home page.png",
+    "thumbLabel": "Ranking",
+    "thumbYear": "Challenge",
     "thumbHue": 120,
-    "description": "Compilation de mes meilleurs travaux en motion design — transitions cinématiques, animations 3D et identités visuelles animées.",
+    "description": "Projet web compétitif autour du jeu League of Legends, création de challenges personnalisés, classements dynamiques et suivi détaillé des performances des joueurs.",
     "images": [
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600",
-      "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600"
+      "assets/img/projects/home page.png",
+      "assets/img/projects/create tournament.png",
+      "assets/img/projects/tournament.png",
+      "assets/img/projects/tournament listes.png"
     ],
-    "video": "https://www.youtube.com/watch?v=IdlI7jb8vio&list=RDMMIdlI7jb8vio&start_radio=1",
+    "video": "",
     "id": 1
   },
   {
-    "id": 2,
-    "name": "Dashboard Analytics",
-    "type": "Développement",
-    "category": "dev",
-    "thumbLabel": "Dashboard",
-    "thumbYear": "Analytics",
-    "thumbHue": 200,
+    "name": "Showreel Motion Design",
+    "type": "Motion Design",
+    "category": "motion",
     "url": "#",
-    "description": "Application web de visualisation de données en temps réel — graphiques interactifs, filtres dynamiques et design responsive.",
+    "thumbnail": "",
+    "thumbLabel": "Showreel",
+    "thumbYear": "2026",
+    "thumbHue": 200,
+    "description": "Showreel of my motion designs of 2026",
     "images": [
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600",
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600"
     ],
-    "video": ""
+    "video": "",
+    "id": 2
   },
   {
     "id": 3,
