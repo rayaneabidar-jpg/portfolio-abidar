@@ -11,7 +11,16 @@
       "Bash(python -c \"import zipfile; z=zipfile.ZipFile\\(''liquid-metal-button.zip''\\); z.extractall\\(''liquid-metal-button-extract''\\); print\\([f.filename for f in z.filelist]\\)\")",
       "Bash(gh auth:*)",
       "Bash(gh repo:*)",
-      "Bash(npx skills:*)"
+      "Bash(npx skills:*)",
+      "Bash(npm list:*)",
+      "Bash(npm install:*)",
+      "Bash(vercel login:*)",
+      "Bash(vercel --yes --name abidar)",
+      "Bash(reg query:*)",
+      "Bash(reg add:*)",
+      "Bash(explorer \"F:\\\\Users\\\\owksa\\\\Documents\\\\Portfolio Abidar\\\\assets\\\\img\\\\projects\")",
+      "Bash(start \"\" \"F:\\\\Users\\\\owksa\\\\Documents\\\\Portfolio Abidar\\\\assets\\\\img\\\\projects\")",
+      "Bash(python -m http.server 8000)"
     ]
   }
 }

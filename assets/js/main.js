@@ -262,9 +262,12 @@
                     <div class="proj-detail">
                         <div class="proj-detail-inner">
                             <div class="proj-detail-head">
-                                <div>
-                                    <span class="proj-detail-type">${p.type}</span>
-                                    <h3 class="proj-detail-title">${p.name}</h3>
+                                <div class="proj-detail-title-row">
+                                    <div>
+                                        <span class="proj-detail-type">${p.type}</span>
+                                        <h3 class="proj-detail-title">${p.name}</h3>
+                                    </div>
+                                    ${p.url && p.url !== '#' ? `<a href="${p.url}" target="_blank" rel="noopener" class="proj-visit btn-chrome"><span>Voir le projet</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>` : ''}
                                 </div>
                                 <button class="proj-close" aria-label="Fermer">${close}</button>
                             </div>

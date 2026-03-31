@@ -1085,6 +1085,47 @@ body.cur-hover .cur-dot { transform: translate(-50%, -50%) scale(1.5); }
     margin-bottom: 24px;
 }
 
+.proj-detail-title-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    flex: 1;
+}
+
+.proj-detail-title-row .proj-visit {
+    margin-bottom: 6px;
+}
+
+.proj-visit {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 22px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--g5);
+    text-decoration: none;
+    border-radius: 100px;
+    white-space: nowrap;
+    transition: color 0.4s ease;
+}
+
+.proj-visit span,
+.proj-visit svg {
+    position: relative;
+    z-index: 1;
+    transition: color 0.4s ease;
+}
+
+.proj-visit:hover {
+    color: var(--bg);
+}
+
+.proj-visit:hover span,
+.proj-visit:hover svg {
+    color: var(--bg);
+}
+
 .proj-detail-media {
     display: flex;
     gap: 12px;
