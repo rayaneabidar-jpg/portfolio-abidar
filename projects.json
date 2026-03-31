@@ -1,17 +1,19 @@
 [
   {
-    "name": "Showreel 2026",
-    "type": "Motion Design",
-    "category": "motion",
-    "url": "#",
+    "name": "Ranking Challenge",
+    "type": "Développement",
+    "category": "dev",
+    "url": "https://soloq-clean.vercel.app/",
     "thumbnail": "assets/img/projects/home page.png",
-    "thumbLabel": "Showreel",
-    "thumbYear": "2026",
+    "thumbLabel": "Ranking",
+    "thumbYear": "Challenge",
     "thumbHue": 120,
-    "description": "Compilation de mes meilleurs travaux en motion design — transitions cinématiques, animations 3D et identités visuelles animées.",
+    "description": "Projet web compétitif autour du jeu League of Legends, création de challenges personnalisés, classements dynamiques et suivi détaillé des performances des joueurs.",
     "images": [
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600",
-      "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600"
+      "assets/img/projects/home page entiere.png",
+      "assets/img/projects/create tournament.png",
+      "assets/img/projects/tournament.png",
+      "assets/img/projects/tournament listes.png"
     ],
     "video": "https://www.youtube.com/watch?v=IdlI7jb8vio&list=RDMMIdlI7jb8vio&start_radio=1",
     "id": 1
