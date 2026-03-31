@@ -10,12 +10,12 @@
     "thumbHue": 120,
     "description": "Projet web compétitif autour du jeu League of Legends, création de challenges personnalisés, classements dynamiques et suivi détaillé des performances des joueurs.",
     "images": [
-      "assets/img/projects/home page entiere.png",
+      "assets/img/projects/home page.png",
       "assets/img/projects/create tournament.png",
       "assets/img/projects/tournament.png",
       "assets/img/projects/tournament listes.png"
     ],
-    "video": "https://www.youtube.com/watch?v=IdlI7jb8vio&list=RDMMIdlI7jb8vio&start_radio=1",
+    "video": "",
     "id": 1
   },
   {
