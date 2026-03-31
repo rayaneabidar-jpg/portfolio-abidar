@@ -19,20 +19,21 @@
     "id": 1
   },
   {
-    "id": 2,
-    "name": "Dashboard Analytics",
-    "type": "Développement",
-    "category": "dev",
-    "thumbLabel": "Dashboard",
-    "thumbYear": "Analytics",
-    "thumbHue": 200,
+    "name": "Showreel Motion Design",
+    "type": "Motion Design",
+    "category": "motion",
     "url": "#",
-    "description": "Application web de visualisation de données en temps réel — graphiques interactifs, filtres dynamiques et design responsive.",
+    "thumbnail": "",
+    "thumbLabel": "Showreel",
+    "thumbYear": "2026",
+    "thumbHue": 200,
+    "description": "Showreel of my motion designs of 2026",
     "images": [
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600",
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600"
     ],
-    "video": ""
+    "video": "",
+    "id": 2
   },
   {
     "id": 3,
