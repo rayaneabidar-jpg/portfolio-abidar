@@ -281,12 +281,58 @@
             }).join('');
             initProjThumbs();
             initProjExpand();
+            initLightbox();
         } catch (e) {
             console.error('Failed to load projects:', e);
         }
     }
 
     /* ─── PROJECT EXPAND ─── */
+    function initLightbox() {
+        const lb = document.createElement('div');
+        lb.className = 'lightbox';
+        lb.innerHTML = '<button class="lightbox-close">✕</button><button class="lb-arrow lb-prev">‹</button><img><button class="lb-arrow lb-next">›</button>';
+        document.body.appendChild(lb);
+        const lbImg = lb.querySelector('img');
+        let gallery = [];
+        let idx = 0;
+
+        const prevBtn = lb.querySelector('.lb-prev');
+        const nextBtn = lb.querySelector('.lb-next');
+
+        function show(i) {
+            idx = (i + gallery.length) % gallery.length;
+            lbImg.src = gallery[idx];
+            prevBtn.style.display = idx === 0 ? 'none' : '';
+            nextBtn.style.display = idx === gallery.length - 1 ? 'none' : '';
+        }
+
+        document.querySelectorAll('.proj-detail-media').forEach(media => {
+            const imgs = media.querySelectorAll('img');
+            imgs.forEach((img, i) => {
+                img.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    gallery = Array.from(imgs).map(im => im.src);
+                    show(i);
+                    lb.classList.add('active');
+                });
+            });
+        });
+
+        lb.querySelector('.lb-prev').addEventListener('click', (e) => { e.stopPropagation(); show(idx - 1); });
+        lb.querySelector('.lb-next').addEventListener('click', (e) => { e.stopPropagation(); show(idx + 1); });
+        lb.querySelector('.lightbox-close').addEventListener('click', (e) => { e.stopPropagation(); lb.classList.remove('active'); });
+        lb.addEventListener('click', () => lb.classList.remove('active'));
+        lbImg.addEventListener('click', (e) => e.stopPropagation());
+
+        document.addEventListener('keydown', (e) => {
+            if (!lb.classList.contains('active')) return;
+            if (e.key === 'ArrowLeft') show(idx - 1);
+            if (e.key === 'ArrowRight') show(idx + 1);
+            if (e.key === 'Escape') lb.classList.remove('active');
+        });
+    }
+
     function initProjExpand() {
         const items = document.querySelectorAll('.proj-item');
         items.forEach(item => {
