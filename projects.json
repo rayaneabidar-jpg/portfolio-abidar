@@ -33,22 +33,6 @@
     "id": 2
   },
   {
-    "id": 5,
-    "name": "Campagne EcoWave",
-    "type": "Communication",
-    "category": "comm",
-    "thumbLabel": "EcoWave",
-    "thumbYear": "Comm",
-    "thumbHue": 160,
-    "url": "#",
-    "description": "Campagne digitale 360° pour une marque éco-responsable — identité visuelle, contenu social media et stratégie d'engagement.",
-    "images": [
-      "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600",
-      "https://images.unsplash.com/photo-1563986768609-322da13575f2?w=600"
-    ],
-    "video": ""
-  },
-  {
     "id": 6,
     "name": "Generative Art",
     "type": "Motion Design",
