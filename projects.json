@@ -31,21 +31,5 @@
     "images": [],
     "video": "https://youtu.be/DBwJ34izi0Q",
     "id": 2
-  },
-  {
-    "id": 6,
-    "name": "Generative Art",
-    "type": "Motion Design",
-    "category": "motion",
-    "thumbLabel": "Gen Art",
-    "thumbYear": "2026",
-    "thumbHue": 60,
-    "url": "#",
-    "description": "Série d'œuvres génératives créées avec code et algorithmes — exploration de formes organiques et patterns infinis.",
-    "images": [
-      "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=600",
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600"
-    ],
-    "video": ""
   }
 ]
