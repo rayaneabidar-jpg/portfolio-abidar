@@ -28,11 +28,8 @@
     "thumbYear": "2026",
     "thumbHue": 200,
     "description": "Showreel of my motion designs of 2026",
-    "images": [
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600"
-    ],
-    "video": "",
+    "images": [],
+    "video": "https://youtu.be/DBwJ34izi0Q",
     "id": 2
   },
   {
