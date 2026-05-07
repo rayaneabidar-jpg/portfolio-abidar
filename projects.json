@@ -33,22 +33,6 @@
     "id": 2
   },
   {
-    "id": 3,
-    "name": "Court-métrage Horizon",
-    "type": "Montage Vidéo",
-    "category": "video",
-    "thumbLabel": "Horizon",
-    "thumbYear": "Film",
-    "thumbHue": 30,
-    "url": "#",
-    "description": "Court-métrage expérimental mêlant prises de vue réelles et effets visuels — color grading cinématique et sound design immersif.",
-    "images": [
-      "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600",
-      "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600"
-    ],
-    "video": ""
-  },
-  {
     "id": 4,
     "name": "Refonte App Livraison",
     "type": "Maquettage UI/UX",
