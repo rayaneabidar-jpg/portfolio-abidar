@@ -31,5 +31,19 @@
     "images": [],
     "video": "https://youtu.be/DBwJ34izi0Q",
     "id": 2
+  },
+  {
+    "name": "Qui est le traître ?",
+    "type": "Montage Vidéo",
+    "category": "video",
+    "url": "#",
+    "thumbnail": "",
+    "thumbLabel": "QLT",
+    "thumbYear": "2026",
+    "thumbHue": 120,
+    "description": "",
+    "images": [],
+    "video": "",
+    "id": 3
   }
 ]
