@@ -42,7 +42,13 @@
     "thumbYear": "2026",
     "thumbHue": 120,
     "description": "Conception complète d’un live interactif sur Twitch pour un créateur de contenu autour d’un concept GTA V avec un traître infiltré : écriture des règles et des mécaniques, création des assets visuels, montage vidéo avec motion design avancé, gestion en régie des différents points de vue et développement d’un système personnalisé de multi-POV permettant la centralisation et le pilotage en direct de plusieurs flux vidéo.",
-    "images": [],
+    "images": [
+      "assets/img/projects/assets1",
+      "assets/img/projects/assets2",
+      "assets/img/projects/assets3",
+      "assets/img/projects/assets4",
+      "assets/img/projects/assets5"
+    ],
     "video": "",
     "id": 3
   }
